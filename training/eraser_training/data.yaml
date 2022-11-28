@@ -1,0 +1,13 @@
+train: ./training/eraser_training/train/images
+val: ./training/eraser_training/valid/images
+test: ./training/eraser_training/test/images
+
+nc: 1
+names: ['eraser']
+
+roboflow:
+  workspace: td2
+  project: eraser-2vume
+  version: 3
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/td2/eraser-2vume/dataset/3

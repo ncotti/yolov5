@@ -1,0 +1,13 @@
+train: ./training/galletas_training/train/images
+val: ./training/galletas_training/valid/images
+test: ./training/galletas_training/test/images
+
+nc: 8
+names: ['Anillo Amarillo', 'Anillo Blanco', 'Anillo Marron', 'Anillo Rosa', 'Beso', 'Duquesa', 'Melba', 'Pepa']
+
+roboflow:
+  workspace: td2
+  project: galletas-yb0fg
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/td2/galletas-yb0fg/dataset/1
