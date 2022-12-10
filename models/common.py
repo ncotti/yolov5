@@ -712,7 +712,7 @@ class AutoShape(nn.Module):
 
 class Detections:
     # YOLOv5 detections class for inference results
-    def __init__(self, ims, pred, files, times=(0, 0, 0), names=None, shape=None):
+    def __init__(self, ims, pred, files, times=(0, 0, 0), names=None, shape=None, linewidth=None, fontsize=None):
         super().__init__()
         d = pred[0].device  # device
         gn = [torch.tensor([*(im.shape[i] for i in [1, 0, 1, 0]), 1, 1], device=d) for im in ims]  # normalizations
@@ -728,6 +728,8 @@ class Detections:
         self.n = len(self.pred)  # number of images (batch size)
         self.t = tuple(x.t / self.n * 1E3 for x in times)  # timestamps (ms)
         self.s = tuple(shape)  # inference BCHW shape
+        self.linewidth = linewidth
+        self.fontsize = fontsize
 
     def _run(self, pprint=False, show=False, save=False, crop=False, render=False, labels=True, save_dir=Path('')):
         s, crops = '', []
@@ -739,7 +741,7 @@ class Detections:
                     s += f"{n} {self.names[int(c)]}{'s' * (n > 1)}, "  # add to string
                 s = s.rstrip(', ')
                 if show or save or render or crop:
-                    annotator = Annotator(im, example=str(self.names))
+                    annotator = Annotator(im, example=str(self.names), font_size=self.fontsize, line_width=self.linewidth)
                     for *box, conf, cls in reversed(pred):  # xyxy, confidence, class
                         label = f'{self.names[int(cls)]} {conf:.2f}'
                         if crop:
