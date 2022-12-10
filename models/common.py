@@ -646,7 +646,7 @@ class AutoShape(nn.Module):
         return self
 
     @smart_inference_mode()
-    def forward(self, ims, size=640, augment=False, profile=False):
+    def forward(self, ims, size=640, augment=False, profile=False, linewidth=None, fontsize=None):
         # Inference from various sources. For size(height=640, width=1280), RGB images example inputs are:
         #   file:        ims = 'data/images/zidane.jpg'  # str or PosixPath
         #   URI:             = 'https://ultralytics.com/images/zidane.jpg'
@@ -707,7 +707,7 @@ class AutoShape(nn.Module):
                 for i in range(n):
                     scale_boxes(shape1, y[i][:, :4], shape0[i])
 
-            return Detections(ims, y, files, dt, self.names, x.shape)
+            return Detections(ims, y, files, dt, self.names, x.shape, fontsize=fontsize, linewidth=linewidth)
 
 
 class Detections:
